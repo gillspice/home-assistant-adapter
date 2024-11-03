@@ -13,6 +13,7 @@
 extern "C" {
 #include "tiny_erd_client.h"
 #include "tiny_gea3_interface.h"
+#include "tiny_stream_uart.h"
 #include "tiny_timer.h"
 }
 
@@ -81,13 +82,9 @@ class GEA3 {
   }
 
  private:
-  static void send(i_tiny_uart_t* _self, uint8_t byte);
-  static i_tiny_event_t* on_send_complete(i_tiny_uart_t* _self);
-  static i_tiny_event_t* on_receive(i_tiny_uart_t* _self);
-
-  const i_tiny_uart_api_t uart_adapter_api = { GEA3::send, GEA3::on_send_complete, GEA3::on_receive };
-
   tiny_timer_group_t timer_group;
+
+  tiny_stream_uart_t stream_uart;
 
   tiny_gea3_interface_t gea3_interface;
   uint8_t send_buffer[255];
@@ -96,19 +93,6 @@ class GEA3 {
 
   tiny_erd_client_t erd_client;
   uint8_t client_queue_buffer[1024];
-
-  struct {
-    i_tiny_uart_t interface;
-
-    Stream* uart;
-    tiny_event_t send_complete_event;
-    tiny_event_t receive_event;
-    tiny_timer_group_t* timer_group;
-    tiny_timer_t timer;
-    bool sent;
-  } uart_adapter;
-
-  void poll();
 };
 
 #endif
