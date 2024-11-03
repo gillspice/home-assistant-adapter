@@ -1,73 +1,7 @@
 #include <Arduino.h>
-#include <PubSubClient.h>
-#include <WiFi.h>
-#include "Config.h"
-#include "HomeAssistantBridge.h"
+#include "GEA3.h"
 
-#ifdef MQTT_TLS
-static WiFiClientSecure wifiClient;
-#else
-static WiFiClient wifiClient;
-#endif
-static PubSubClient mqttClient(wifiClient);
-static HomeAssistantBridge bridge;
-
-static void configureWifi()
-{
-  Serial.println("\nConnecting to " + String(ssid));
-
-  WiFi.begin(ssid, password);
-
-  while(WiFi.status() != WL_CONNECTED) {
-    delay(100);
-    Serial.print(".");
-  }
-
-#ifdef MQTT_TLS
-#ifdef MQTT_TLS_VERIFY
-  X509List* cert = new X509List(CERT);
-  wifiClient.setTrustAnchors(cert);
-#else
-  wifiClient.setInsecure();
-#endif
-#endif
-
-  Serial.println("WiFi connected");
-}
-
-static void configureMqtt()
-{
-  mqttClient.setServer(mqtt_server, mqtt_server_port);
-}
-
-static void connectToMqtt()
-{
-  while(WiFi.status() != WL_CONNECTED) {
-    digitalWrite(LED_WIFI, LOW);
-    delay(100);
-    Serial.print(".");
-  }
-  digitalWrite(LED_WIFI, HIGH);
-
-  if(!mqttClient.connected()) {
-    digitalWrite(LED_MQTT, LOW);
-
-    while(!mqttClient.connected()) {
-      Serial.print("Attempting MQTT connection...");
-
-      if(mqttClient.connect("", mqttUser, mqttPassword)) {
-        Serial.println("connected");
-        digitalWrite(LED_MQTT, HIGH);
-      }
-      else {
-        Serial.println("failed, rc=" + String(mqttClient.state()) + " will try again in 5 seconds");
-        delay(5000);
-      }
-    }
-
-    bridge.notifyMqttDisconnected();
-  }
-}
+static GEA3 gea3;
 
 void setup()
 {
@@ -77,16 +11,22 @@ void setup()
   pinMode(LED_WIFI, OUTPUT);
   pinMode(LED_MQTT, OUTPUT);
 
-  configureWifi();
-  configureMqtt();
+  Serial1.begin(GEA3::baud, SERIAL_8N1, D7, D6);
 
-  Serial1.begin(HomeAssistantBridge::baud, SERIAL_8N1, D7, D6);
-  bridge.begin(mqttClient, Serial1, deviceId);
+  gea3.begin(Serial1);
+  gea3.send(GEA3::Packet(0xE4, 0xFF, (uint8_t[]){ 0x01 }));
+  gea3.send(GEA3::Packet(0xE4, 0xFF, (uint8_t[]){ 0x02 }));
+  gea3.send(GEA3::Packet(0xE4, 0xFF, (uint8_t[]){ 0x03 }));
+  gea3.send(GEA3::Packet(0xE4, 0xFF, { 0x05 }));
+  gea3.send(GEA3::Packet(0xE4, 0xFF, { 0x06 }));
+  gea3.send(GEA3::Packet(0xE4, 0xFF, { 0x07, 8, 9, 10 }));
+
+  gea3.readERD(0xC0, 0x1234);
+  gea3.writeERD(0xC0, 0x1234, (uint16_t)0xABCD);
 }
 
 void loop()
 {
-  connectToMqtt();
-  bridge.loop();
+  gea3.loop();
   digitalWrite(LED_HEARTBEAT, millis() % 1000 < 500);
 }
