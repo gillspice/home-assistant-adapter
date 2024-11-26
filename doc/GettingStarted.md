@@ -53,7 +53,9 @@ We might as well start at the beginning.  ERD 0x001 is defined as follows in the
 ---
 <br>
 This ERD reports the model number of the appliance.  We can configure a MQTT sensor in Home Assistant to access this information.  Details can be found here:  https://www.home-assistant.io/integrations/sensor.mqtt/
+
 ---
+
 Here is Yaml for this ERD.  The unique_id is a way to identify the sensor.  State_topic lets Home Assistant know where to find the sensor data, this can be found in MQTT explorer, notice the deviceId we specified in config.h is included in the state_topic.  The value_template section converts the hex data of the ERD to a readable string.  The device section defines the MQTT device in Home Assistant under which this sensor will appear.  You can either create a yaml file in the packages directory using the file editor within Home Assistant, or create the file on another device and transfer via Samba.  Once the file is in place you can use Developer Tools>Check Configuration from Home Assistant in order to verify you haven’t generated an error that would prevent Home Assistant from starting, and then  ALL YAML CONFIGURATION from the Yaml reloading section to load the Yaml.  After the restart, under Settings>Devices and Services>MQTT you should see the devices and entities that you created.
 
 ```
