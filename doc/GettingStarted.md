@@ -93,3 +93,5 @@ mqtt:
  The value_template section converts the hex data of the ERD to a readable string.  
  The device section defines the MQTT device in Home Assistant under which this sensor will appear.  
  You can either create a yaml file in the packages directory using the file editor within Home Assistant, or create the file on another device and transfer via Samba.  Once the file is in place you can use Developer Tools>Check Configuration from Home Assistant in order to verify you haven’t generated an error that would prevent Home Assistant from starting, and then  ALL YAML CONFIGURATION from the Yaml reloading section to load the Yaml.  After the restart, under Settings>Devices and Services>MQTT you should see the devices and entities that you created.
+ 
+ ![Slide10](./images/Slide10.PNG)	
