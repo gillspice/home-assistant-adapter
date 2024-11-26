@@ -1,7 +1,7 @@
 ![Slide1](./images/Slide1.PNG)
 ---
 ![Slide2](./images/Slide2.PNG)
-In a new window, select Clone Git Repository and clone the following repo:
+### In a new window, select Clone Git Repository and clone the following repo:
 
 https://github.com/geappliances/home-assistant-adapter
 ---
@@ -17,7 +17,6 @@ Install MQTT explorer: https://mqtt-explorer.com/
 ![Slide7](./images/Slide7.PNG)
 ---
 <img align="left" src="./images/Slide8.PNG">
-![Slide8](./images/Slide8.PNG)
 
 In MQTT under geappliances and the device ID that you specified in config.h, you should see a list of ERDs.  You may need to power cycle the appliance for the list to be fully populated.
 
