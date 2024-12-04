@@ -3,12 +3,15 @@ Install PLatform.io
 ![Slide1](./images/Slide1.PNG)
 ---
 ![Slide2](./images/Slide2.PNG)
-### In a new window, select Clone Git Repository and clone the following repo:
+
+In a new window, select Clone Git Repository and clone the following repo:
 
 https://github.com/geappliances/home-assistant-adapter
 ---
 ![Slide3](./images/Slide3.PNG)
+
 In the explorer, select the config dropdown
+
 Go to [Config.h.sample](../config/Config.h.sample#L14) and change the WiFi credentials, Home Assistant user login information. And rename `Config.h.sample` to `Config.h` and `Certificate.h.sample` to `Certificate.h`.
 ---
 ![Slide4](./images/Slide4.PNG)
