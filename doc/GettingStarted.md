@@ -13,6 +13,7 @@ https://github.com/geappliances/home-assistant-adapter
 In the explorer, select the config dropdown
 
 Go to [Config.h.sample](../config/Config.h.sample#L14) and change the WiFi credentials, Home Assistant user login information. And rename `Config.h.sample` to `Config.h` and `Certificate.h.sample` to `Certificate.h`.
+
 ---
 ![Slide4](./images/Slide4.PNG)
 Within Home Assistant, install the Mosquitto MQTT broker by going to settings>Add-ons>ADD-ON STORE and searching for Mosquitto.  Install and start the add-on.
