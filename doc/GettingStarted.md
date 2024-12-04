@@ -1,4 +1,5 @@
-## Install PLatform.io
+---
+Install PLatform.io
 ![Slide1](./images/Slide1.PNG)
 ---
 ![Slide2](./images/Slide2.PNG)
@@ -13,9 +14,8 @@ Go to [Config.h.sample](../config/Config.h.sample#L14) and change the WiFi crede
 ![Slide4](./images/Slide4.PNG)
 Within Home Assistant, install the Mosquitto MQTT broker by going to settings>Add-ons>ADD-ON STORE and searching for Mosquitto.  Install and start the add-on.
 
-Install the File editor Add-on to edit configuration files.
+Install the File editor Add-on to edit configuration files.  Also installing the Samba share add on is a convenient way to transfer yaml configuration files to your home assistant instance. 
 
-Also installing the Samba share add on is a convenient way to transfer yaml configuration files to your home assistant instance. 
 ---
 ![Slide5](./images/Slide5.PNG)
 
@@ -28,6 +28,9 @@ When the Build and Upload is complete, you should see that Wifi and MQTT are con
 
 ---
 ![Slide6](./images/Slide6.PNG)
+
+In Home Assistant, open configuration.yaml in the file editor and add an include for a packages directory.
+
 ---
 Install MQTT explorer: https://mqtt-explorer.com/
 
