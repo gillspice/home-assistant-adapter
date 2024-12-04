@@ -1,5 +1,5 @@
 ---
-Install PLatform.io
+Install Platform.io https://platformio.org/
 ![Slide1](./images/Slide1.PNG)
 ---
 ![Slide2](./images/Slide2.PNG)
