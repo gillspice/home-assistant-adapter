@@ -1,3 +1,4 @@
+## Install PLatform.io
 ![Slide1](./images/Slide1.PNG)
 ---
 ![Slide2](./images/Slide2.PNG)
@@ -6,14 +7,32 @@
 https://github.com/geappliances/home-assistant-adapter
 ---
 ![Slide3](./images/Slide3.PNG)
+In the explorer, select the config dropdown
+Go to [Config.h.sample](../config/Config.h.sample#L14) and change the WiFi credentials, Home Assistant user login information. And rename `Config.h.sample` to `Config.h` and `Certificate.h.sample` to `Certificate.h`.
 ---
 ![Slide4](./images/Slide4.PNG)
+Within Home Assistant, install the Mosquitto MQTT broker by going to settings>Add-ons>ADD-ON STORE and searching for Mosquitto.  Install and start the add-on.
+
+Install the File editor Add-on to edit configuration files.
+
+Also installing the Samba share add on is a convenient way to transfer yaml configuration files to your home assistant instance. 
 ---
 ![Slide5](./images/Slide5.PNG)
+
+Connect your adapter via USB cable
+
+In the PlatformIO section, select the xiao_C3 dropdown then select Upload and Monitor
+
+When the Build and Upload is complete, you should see that Wifi and MQTT are connected.  Disconnect the USB cable and connect the adapter to a compatible appliance.  The first LED should blink, and the remaining 2 LEDs indicate Wifi and MQTT connection when ON
+
+
 ---
 ![Slide6](./images/Slide6.PNG)
 ---
 Install MQTT explorer: https://mqtt-explorer.com/
+
+Connect to your Home Assistant MQTT server, the Username and Password should be the credentials for a Home Assistant user (configured in Settings>People within Home Assistant)
+
 
 ![Slide7](./images/Slide7.PNG)
 ---
